@@ -89,7 +89,10 @@ export default function Footer() {
             data?.message ||
             (typeof data === "string" ? data : "");
         } catch (parseErr) {
-          console.warn("Newsletter error: could not parse JSON response", parseErr);
+          console.warn(
+            "Newsletter error: could not parse JSON response",
+            parseErr
+          );
         }
         throw new Error(detail || `Request failed (${res.status})`);
       }
@@ -178,7 +181,8 @@ export default function Footer() {
               Newsletter
             </h4>
             <p className="mt-4 text-sm text-stone-600">
-              Fii la curent cu noile sesiuni, locurile disponibile și inițiativele noastre educaționale.
+              Abonează-te ca să primești noutăți despre sesiuni, locuri
+              disponibile și resurse pentru părinți.
             </p>
 
             <form className="mt-6 space-y-3" onSubmit={onSubscribe}>
@@ -231,9 +235,12 @@ export default function Footer() {
                   {message}
                 </p>
               ) : (
-                <p className="text-xs text-stone-500">
-                  Fără spam. Te poți dezabona oricând.
-                </p>
+                <>
+                  <p className="text-xs text-stone-500">
+                    Când apăsați „Subscribe”, acceptați să primiți comunicări pe
+                    email. Vă puteți dezabona oricând.{" "}
+                  </p>
+                </>
               )}
             </form>
           </div>

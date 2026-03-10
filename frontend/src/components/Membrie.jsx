@@ -361,7 +361,7 @@ export default function Membrie() {
               {step === 1 && (
                 <div>
                   <h2 className="text-3xl sm:text-4xl">Detalii Părinte</h2>
-                  <p className="mt-2 text-stone-600">Datele vor fi folosite doar pentru a te contacta.</p>
+                  <p className="mt-2 text-stone-600">Datele vor fi folosite doar pentru a vă contacta în legătură cu această aplicație.</p>
 
                   <div className="mt-8 grid gap-6">
                     <Field
