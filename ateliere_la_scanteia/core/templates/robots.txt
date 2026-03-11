@@ -2,4 +2,4 @@ User-agent: *
 Disallow: /admin/
 Disallow: /django-admin/
 
-Sitemap: https://atelierele-scanteia.ro/sitemap.xml
+Sitemap: https://atelierelascanteia.ro/sitemap.xml
