@@ -1,6 +1,14 @@
+from django.conf import settings
 from django.contrib.sitemaps import Sitemap
 
 from core.models import JurnalArticlePage, JurnalIndexPage
+
+
+def get_frontend_base_url():
+    return (
+        getattr(settings, "PUBLIC_BASE_URL", "").strip().rstrip("/")
+        or "https://atelierelascanteia.ro"
+    )
 
 
 class JurnalSitemap(Sitemap):
@@ -12,8 +20,8 @@ class JurnalSitemap(Sitemap):
         return JurnalArticlePage.objects.live().public().order_by("-first_published_at")
 
     def location(self, obj):
-        # Wagtail pages already know their URL
-        return obj.get_url()
+        frontend_base = get_frontend_base_url()
+        return f"{frontend_base}/jurnal/{obj.slug}/"
 
 
 class JurnalIndexSitemap(Sitemap):
@@ -21,8 +29,9 @@ class JurnalIndexSitemap(Sitemap):
     priority = 0.6
 
     def items(self):
-        # Include the /jurnal/ index page too (if you want it indexed)
+        # Include the /jurnal/ index page too
         return JurnalIndexPage.objects.live().public()
 
     def location(self, obj):
-        return obj.get_url()
+        frontend_base = get_frontend_base_url()
+        return f"{frontend_base}/jurnal/"
