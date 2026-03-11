@@ -1,14 +1,6 @@
-from django.conf import settings
 from django.contrib.sitemaps import Sitemap
 
 from core.models import JurnalArticlePage, JurnalIndexPage
-
-
-def get_frontend_base_url():
-    return (
-        getattr(settings, "PUBLIC_BASE_URL", "").strip().rstrip("/")
-        or "https://atelierelascanteia.ro"
-    )
 
 
 class JurnalSitemap(Sitemap):
@@ -20,8 +12,8 @@ class JurnalSitemap(Sitemap):
         return JurnalArticlePage.objects.live().public().order_by("-first_published_at")
 
     def location(self, obj):
-        frontend_base = get_frontend_base_url()
-        return f"{frontend_base}/jurnal/{obj.slug}/"
+        # Return only the path; Django will prepend the domain automatically
+        return f"/jurnal/{obj.slug}/"
 
 
 class JurnalIndexSitemap(Sitemap):
@@ -33,5 +25,4 @@ class JurnalIndexSitemap(Sitemap):
         return JurnalIndexPage.objects.live().public()
 
     def location(self, obj):
-        frontend_base = get_frontend_base_url()
-        return f"{frontend_base}/jurnal/"
+        return "/jurnal/"
